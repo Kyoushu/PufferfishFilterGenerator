@@ -52,10 +52,8 @@ define(['jquery'], function($){
         var data = this.getData();
         var output = [];
 
-        output.push('/**');
-        output.push(' * Generated with Kyoushu/PufferfishFilterGenerator (https://github.com/Kyoushu/PufferfishFilterGenerator)');
-        output.push(' * Parameters: ' + JSON.stringify(data));
-        output.push(' */');
+        output.push('# Generated with Kyoushu/PufferfishFilterGenerator (https://github.com/Kyoushu/PufferfishFilterGenerator)');
+        output.push('# Parameters: ' + JSON.stringify(data));
         output.push('');
 
         var widthDiff = parseInt(data.upper_width) - parseInt(data.lower_width);
