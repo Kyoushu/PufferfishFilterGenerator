@@ -1,0 +1,8 @@
+{
+    "name": "PufferfishFilterGenerator",
+    "dependencies": {
+        "foundation": "~5.4",
+        "requirejs": "~2.1",
+        "jquery": "~2.1"
+    }
+}

@@ -1,0 +1,75 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+    <div data-pufferfish-filter-generator class="data-pufferfish-filter-generator">
+
+        <div class="panel">
+
+            <h2>Parameters</h2>
+
+            <form data-pufferfish-filter-generator-form>
+
+                <div class="row">
+                    <div class="small-6 columns">
+                        <label for="filter-prefix">
+                            Prefix
+                            <input type="text" id="filter-prefix" name="prefix" value="default"/>
+                        </label>
+                    </div>
+                    <div class="small-6 columns">
+                        <label for="lower-width">
+                            Lower Width
+                            <input id="lower-width" type="text" name="lower_width" value="100"/>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-6 columns">
+                        <label for="upper-width">
+                            Upper Width
+                            <input id="upper-width" type="text" name="upper_width" value="1200"/>
+                        </label>
+                    </div>
+                    <div class="small-6 columns">
+                        <label for="iterations">
+                            Iterations
+                            <input id="iterations" type="text" name="iterations" value="6"/>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-6 columns">
+                        <label for="aspect-ratio">
+                            Aspect Ratio
+                            <input id="aspect-ratio" type="text" name="aspect_ratio" value="1.333"/>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 columns">
+                        <button type="submit">Create Filters</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="panel">
+                    <h2>Output</h2>
+                    <textarea data-pufferfish-filter-generator-output class="data-pufferfish-filter-generator--output"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

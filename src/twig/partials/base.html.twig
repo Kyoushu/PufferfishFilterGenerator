@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    {% block head %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block meta_title %}Pufferfish.js Filter Generator{% endblock %}</title>
+        <link rel="stylesheet" href="css/app.css" />
+        <script data-main="js/app" src="js/require.js"></script>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% block header %}
+        <div class="row">
+            <div class="small-12 columns">
+                <h1>Pufferfish.js Filter Generator</h1>
+            </div>
+        </div>
+    {% endblock %}
+
+    <div class="row">
+        <div class="small-12 columns">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    {% block footer %}
+    {% endblock %}
+
+{% endblock %}
+</body>
+</html>
