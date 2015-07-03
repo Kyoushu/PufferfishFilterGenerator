@@ -77,7 +77,8 @@ define(['jquery'], function($){
 
             output.push(data.prefix + '_' + width + ':');
             output.push('    filters:');
-            output.push('        thumbnail: { size: [' + width + ', ' + height + '], mode: outbound }');
+            output.push('        upscale: { min: [' + width + ', ' + height + '] }');
+            output.push('        thumbnail: { size: [' + width + ', ' + height + '], mode: outbound, allow_upscale: true }');
             output.push('');
         }
         else{
@@ -90,7 +91,8 @@ define(['jquery'], function($){
 
                 output.push(data.prefix + '_' + width + ':');
                 output.push('    filters:');
-                output.push('        thumbnail: { size: [' + width + ', ' + height + '], mode: outbound }');
+                output.push('        upscale: { min: [' + width + ', ' + height + '] }');
+                output.push('        thumbnail: { size: [' + width + ', ' + height + '], mode: outbound, allow_upscale: true }');
                 output.push('');
 
             }
