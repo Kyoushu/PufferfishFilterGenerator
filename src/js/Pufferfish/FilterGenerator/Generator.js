@@ -76,9 +76,12 @@ define(['jquery'], function($){
             height = Math.round(parseInt(data.lower_width) / parseFloat(data.aspect_ratio));
 
             output.push(data.prefix + '_' + width + ':');
+            output.push('    jpeg_quality: 85');
             output.push('    filters:');
             output.push('        upscale: { min: [' + width + ', ' + height + '] }');
             output.push('        thumbnail: { size: [' + width + ', ' + height + '], mode: outbound, allow_upscale: true }');
+            output.push('    post_processors:');
+            output.push('        jpegoptim: {}');
             output.push('');
         }
         else{
@@ -90,9 +93,12 @@ define(['jquery'], function($){
                 height = Math.round(width / parseFloat(data.aspect_ratio));
 
                 output.push(data.prefix + '_' + width + ':');
+                output.push('    jpeg_quality: 85');
                 output.push('    filters:');
                 output.push('        upscale: { min: [' + width + ', ' + height + '] }');
                 output.push('        thumbnail: { size: [' + width + ', ' + height + '], mode: outbound, allow_upscale: true }');
+                output.push('    post_processors:');
+                output.push('        jpegoptim: {}');
                 output.push('');
 
             }
