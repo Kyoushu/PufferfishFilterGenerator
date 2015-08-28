@@ -11,10 +11,19 @@
             <form data-pufferfish-filter-generator-form>
 
                 <div class="row">
+                    <div class="small-12 columns">
+                        <label for="config_json">
+                            Config JSON
+                            <input type="text" id="config_json" name="config_json" value=""/>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="small-6 columns">
-                        <label for="filter-prefix">
+                        <label for="prefix">
                             Prefix
-                            <input type="text" id="filter-prefix" name="prefix" value="default"/>
+                            <input type="text" id="prefix" name="prefix" value="default"/>
                         </label>
                     </div>
                     <div class="small-6 columns">
@@ -65,6 +74,16 @@
                             <select name="type" id="type">
                                 <option value="thumbnail">Thumbnail</option>
                                 <option value="widen">Widen</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="small-6 columns">
+                        <label for="jpeg_quality">
+                            JPEG Quality
+                            <select name="jpeg_quality" id="jpeg_quality">
+                                {% for quality in range(0, 100, 10) %}
+                                    <option {{ quality == 80 ? 'selected' : '' }} value="{{ quality }}">{{ quality }}</option>
+                                {% endfor %}
                             </select>
                         </label>
                     </div>

@@ -89,6 +89,11 @@ module.exports = function(grunt) {
                         filter: 'isFile'
                     },
                     {
+                        src: ['bower_components/jquery-ui/jquery-ui.js'],
+                        dest: 'dist/js/jquery-ui.js',
+                        filter: 'isFile'
+                    },
+                    {
                         expand: true,
                         cwd: 'src/js',
                         src: '**/*',

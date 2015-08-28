@@ -1,4 +1,4 @@
-define(['jquery'], function($){
+define(['jquery', 'jquery-ui'], function($){
 
     var generator = function(node){
 
@@ -38,17 +38,62 @@ define(['jquery'], function($){
         this.getFields().each(function(){
             var element = $(this);
             var key = element.attr('name');
+            if(key === 'config_json') return;
             if(!key) return;
-            var value = element.val();
-            data[key] = value;
+            data[key] = element.val();
         });
 
         return data;
 
     };
 
+    generator.prototype.getConfig = function(){
+
+        var configJson = this.form.find('input[name=config_json]').val();
+        if(!configJson) return null;
+        var config = JSON.parse(configJson);
+
+        if(typeof config !== 'object') return null;
+
+        var defaults = {
+            'prefix': 'default',
+            'resizer': 'liip',
+            'lower_width': 100,
+            'upper_width': 1200,
+            'iterations': 6,
+            'aspect_ratio': 1.333,
+            'type': 'thumbnail',
+            'jpeg_quality': 80
+        };
+
+        return $.extend({}, defaults, config);
+
+    };
+
+    generator.prototype.applyConfig = function(config){
+
+        var form = this.form;
+
+        $.each(config, function(key, value){
+            var field = form.find('[name=' + key + ']');
+            field.val(value);
+            field.css('background-color', '#CCF');
+            field.animate({'background-color': '#FFF'}, 1000);
+        });
+
+        this.form.find('input[name=config_json]').val('');
+
+    };
+
     generator.prototype.generateOutput = function(){
+
+        var config = this.getConfig();
+        if(config !== null){
+            this.applyConfig(config);
+        }
+
         var data = this.getData();
+
         if(data.resizer === 'liip'){
             this.generateLiipOutput();
         }
@@ -57,11 +102,12 @@ define(['jquery'], function($){
         }
     };
 
-    generator.prototype.generateLiipFilterOutput = function(prefix, type, width, height){
+    generator.prototype.generateLiipFilterOutput = function(prefix, type, width, height, jpeg_quality){
 
         var output = [];
 
         output.push(prefix + '_' + width + ':');
+        output.push('    jpeg_quality: ' + jpeg_quality);
         output.push('    filters:');
         output.push('        upscale: { min: [' + width + ', ' + height + '] }');
         if(type === 'thumbnail'){
@@ -87,6 +133,7 @@ define(['jquery'], function($){
         var widthDiff = parseInt(data.upper_width) - parseInt(data.lower_width);
 
         var width, height;
+        var jpeg_quality = data.jpeg_quality;
 
         if(data['iterations'] === 1){
             width = parseInt(data.lower_width);
@@ -100,7 +147,7 @@ define(['jquery'], function($){
             for(var i = 0; i < parseInt(data.iterations); i++){
                 width = parseInt(data.lower_width) + Math.round(increment * i);
                 height = Math.round(width / parseFloat(data.aspect_ratio));
-                output.push( this.generateLiipFilterOutput(data.prefix, data.type, width, height) );
+                output.push( this.generateLiipFilterOutput(data.prefix, data.type, width, height, jpeg_quality) );
                 output.push('');
             }
         }
