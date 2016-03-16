@@ -80,7 +80,7 @@
                         JPEG Quality
                         <select name="jpeg_quality" id="jpeg_quality">
                             {{#each options.quality_choices}}
-                                <option {{#ifEqual options.default_quality this}}selected{{/ifEqual}} value="{{this}}">{{this}}</option>
+                                <option {{#ifEqual ../options.default_quality this}}selected{{/ifEqual}} value="{{this}}">{{this}}</option>
                             {{/each}}
                         </select>
                     </label>
