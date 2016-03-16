@@ -1,29 +1,79 @@
-define(['jquery', 'jquery-ui'], function($){
+(function($, window, document, undefined){
 
-    var generator = function(node){
+    Handlebars.registerHelper('ifEqual', function(v1, v2, options) {
+        if(v1 === v2) {
+            return options.fn(this);
+        }
+        return options.inverse(this);
+    });
+
+    var generator = function(node, options){
+
+        var defaults = {
+            'template_url': null,
+            'quality_choices': [25,50,75,80,90,100],
+            'default_quality': 80,
+            'type_choices': {
+                'thumbnail': 'Thumbnail',
+                'widen': 'Widen'
+            },
+            'resizer_choices': {
+                'liip': 'liip/imagine-bundle',
+                'avalanche': 'avalanche123/imagine-bundle'
+            }
+        };
+
+        options = $.extend({}, defaults, options);
+        this.options = options;
+
+        if(!options.template_url) throw 'template_url not provided';
 
         var generator = this;
         var container = $(node);
 
-        this.form = container.find('[data-pufferfish-filter-generator-form]');
-        this.output = container.find('[data-pufferfish-filter-generator-output]');
+        $.ajax(options.template_url, {
+            'success': function(html){
 
-        this.output.on('click', function(){
-            generator.output.select();
+                var template = Handlebars.compile(html);
+
+                container.empty().html(
+                    template({
+                        'options': options
+                    })
+                );
+
+                generator.form = container.find('[data-pufferfish-filter-generator-form]');
+                generator.output = container.find('[data-pufferfish-filter-generator-output]');
+
+                generator.output.on('click', function(){
+                    generator.output.select();
+                });
+
+                generator.getFields().on('keyup change paste', function(e){
+
+                    var field = $(this);
+
+                    var updateConfigJson = true;
+                    if(field.attr('name') == 'config_json'){
+                        updateConfigJson = false;
+                    }
+
+                    generator.generateOutput(updateConfigJson)
+                });
+
+                generator.form.on('submit', function(e){
+                    e.preventDefault();
+                    generator.generateOutput();
+                });
+
+                generator.generateOutput(true);
+
+            }
         });
-
-        this.getFields().on('keyup', function(){ generator.generateOutput() });
-        this.getFields().on('change', function(){ generator.generateOutput() });
-
-        this.form.on('submit', function(e){
-            e.preventDefault();
-            generator.generateOutput();
-        });
-
-        this.generateOutput();
 
     };
 
+    generator.prototype.options = null;
     generator.prototype.form = null;
     generator.prototype.output = null;
 
@@ -77,15 +127,17 @@ define(['jquery', 'jquery-ui'], function($){
         $.each(config, function(key, value){
             var field = form.find('[name=' + key + ']');
             field.val(value);
-            field.css('background-color', '#CCF');
-            field.animate({'background-color': '#FFF'}, 1000);
         });
-
-        this.form.find('input[name=config_json]').val('');
 
     };
 
-    generator.prototype.generateOutput = function(){
+    generator.prototype.generateOutput = function(updateConfigJson){
+
+        if(typeof updateConfigJson === 'undefined') updateConfigJson = false;
+
+        if(updateConfigJson){
+            this.form.find('input[name=config_json]').val( JSON.stringify(this.getData()) );
+        }
 
         var config = this.getConfig();
         if(config !== null){
@@ -207,6 +259,10 @@ define(['jquery', 'jquery-ui'], function($){
 
     };
 
-    return generator;
+    $.fn.pufferfishFilterGenerator = function(options){
+        $(this).each(function(){
+            $(this).data('pufferfishFilterGenerator', new generator(this, options));
+        });
+    };
 
-});
+})( jQuery, window, window.document);

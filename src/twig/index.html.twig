@@ -2,114 +2,16 @@
 
 {% block content %}
 
-    <div data-pufferfish-filter-generator class="data-pufferfish-filter-generator">
+    <div data-pufferfish-filter-generator></div>
 
-        <div class="panel">
+{% endblock %}
 
-            <h2>Parameters</h2>
+{% block javascripts %}
 
-            <form data-pufferfish-filter-generator-form>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/handlebars.js"></script>
+    <script src="/js/generator.js"></script>
 
-                <div class="row">
-                    <div class="small-12 columns">
-                        <label for="config_json">
-                            Config JSON
-                            <input type="text" id="config_json" name="config_json" value=""/>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="small-6 columns">
-                        <label for="prefix">
-                            Prefix
-                            <input type="text" id="prefix" name="prefix" value="default"/>
-                        </label>
-                    </div>
-                    <div class="small-6 columns">
-                        <label for="resizer">
-                            Resizer
-                            <select id="resizer" name="resizer">
-                                <option value="liip">liip/imagine-bundle</option>
-                                <option value="avalanche">avalanche123/imagine-bundle</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="small-6 columns">
-                        <label for="lower-width">
-                            Lower Width
-                            <input id="lower-width" type="text" name="lower_width" value="100"/>
-                        </label>
-                    </div>
-                    <div class="small-6 columns">
-                        <label for="upper-width">
-                            Upper Width
-                            <input id="upper-width" type="text" name="upper_width" value="1200"/>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="small-6 columns">
-                        <label for="iterations">
-                            Iterations
-                            <input id="iterations" type="text" name="iterations" value="6"/>
-                        </label>
-                    </div>
-                    <div class="small-6 columns">
-                        <label for="aspect-ratio">
-                            Aspect Ratio
-                            <input id="aspect-ratio" type="text" name="aspect_ratio" value="1.333"/>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="small-6 columns">
-                        <label for="type">
-                            Type
-                            <select name="type" id="type">
-                                <option value="thumbnail">Thumbnail</option>
-                                <option value="widen">Widen</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="small-6 columns">
-                        <label for="jpeg_quality">
-                            JPEG Quality
-                            <select name="jpeg_quality" id="jpeg_quality">
-                                {% for quality in range(0, 100, 10) %}
-                                    <option {{ quality == 80 ? 'selected' : '' }} value="{{ quality }}">{{ quality }}</option>
-                                {% endfor %}
-                            </select>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="small-12 columns">
-                        <button type="submit">Create Filters</button>
-                    </div>
-                </div>
-
-            </form>
-
-        </div>
-
-
-
-        <div class="row">
-            <div class="small-12 columns">
-                <div class="panel">
-                    <h2>Output</h2>
-                    <textarea data-pufferfish-filter-generator-output class="data-pufferfish-filter-generator--output"></textarea>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <script src="/js/app.js"></script>
 
 {% endblock %}

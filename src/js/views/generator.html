@@ -1,0 +1,109 @@
+<div class="data-pufferfish-filter-generator">
+
+    <div class="panel">
+
+        <h2>Parameters</h2>
+
+        <form data-pufferfish-filter-generator-form>
+
+            <div class="row">
+                <div class="small-12 columns">
+                    <label for="config_json">
+                        Config JSON
+                        <input type="text" id="config_json" name="config_json" value=""/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-6 columns">
+                    <label for="prefix">
+                        Prefix
+                        <input type="text" id="prefix" name="prefix" value="default"/>
+                    </label>
+                </div>
+                <div class="small-6 columns">
+                    <label for="resizer">
+                        Resizer
+                        <select id="resizer" name="resizer">
+                            {{#each options.resizer_choices}}
+                                <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-6 columns">
+                    <label for="lower-width">
+                        Lower Width
+                        <input id="lower-width" type="text" name="lower_width" value="100"/>
+                    </label>
+                </div>
+                <div class="small-6 columns">
+                    <label for="upper-width">
+                        Upper Width
+                        <input id="upper-width" type="text" name="upper_width" value="1200"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-6 columns">
+                    <label for="iterations">
+                        Iterations
+                        <input id="iterations" type="text" name="iterations" value="6"/>
+                    </label>
+                </div>
+                <div class="small-6 columns">
+                    <label for="aspect-ratio">
+                        Aspect Ratio
+                        <input id="aspect-ratio" type="text" name="aspect_ratio" value="1.333"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-6 columns">
+                    <label for="type">
+                        Type
+                        <select name="type" id="type">
+                            {{#each options.type_choices}}
+                                <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                </div>
+                <div class="small-6 columns">
+                    <label for="jpeg_quality">
+                        JPEG Quality
+                        <select name="jpeg_quality" id="jpeg_quality">
+                            {{#each options.quality_choices}}
+                                <option {{#ifEqual options.default_quality this}}selected{{/ifEqual}} value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-12 columns">
+                    <button type="submit">Create Filters</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="panel">
+                <h2>Output</h2>
+                <textarea data-pufferfish-filter-generator-output class="data-pufferfish-filter-generator--output"></textarea>
+            </div>
+        </div>
+    </div>
+
+</div>

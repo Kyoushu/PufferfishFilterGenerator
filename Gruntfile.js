@@ -30,7 +30,7 @@ module.exports = function(grunt) {
             },
 
             scripts: {
-                files: ['src/js/**/*.js'],
+                files: ['src/js/**/*.js','src/js/**/*.html'],
                 tasks: ['copy']
             },
 
@@ -79,11 +79,6 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     {
-                        src: 'bower_components/requirejs/require.js',
-                        dest: 'dist/js/require.js',
-                        filter: 'isFile'
-                    },
-                    {
                         src: ['bower_components/jquery/dist/jquery.js'],
                         dest: 'dist/js/jquery.js',
                         filter: 'isFile'
@@ -91,6 +86,11 @@ module.exports = function(grunt) {
                     {
                         src: ['bower_components/jquery-ui/jquery-ui.js'],
                         dest: 'dist/js/jquery-ui.js',
+                        filter: 'isFile'
+                    },
+                    {
+                        src: ['bower_components/handlebars/handlebars.js'],
+                        dest: 'dist/js/handlebars.js',
                         filter: 'isFile'
                     },
                     {

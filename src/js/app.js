@@ -1,11 +1,7 @@
-requirejs.config({
-    'baseUrl': 'js'
-});
+$(function(){
 
-require(['Pufferfish/FilterGenerator/Generator'], function(generator){
-
-    $('[data-pufferfish-filter-generator]').each(function(){
-        new generator(this);
+    $('[data-pufferfish-filter-generator]').pufferfishFilterGenerator({
+        'template_url': '/js/views/generator.html'
     });
 
 });
